@@ -8,5 +8,11 @@
   },
   "author": "Xapphire13",
   "license": "MIT",
-  "keywords": ["bose", "soundtouch"]
+  "keywords": [
+    "bose",
+    "soundtouch"
+  ],
+  "devDependencies": {
+    "@types/node": "^8.0.26"
+  }
 }
