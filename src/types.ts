@@ -59,3 +59,15 @@ export type Source = {
   name: string;
   sourceAccount: string;
 };
+
+export type BassCapability = {
+  bassAvailable: boolean;
+  bassMin: number;
+  bassMax: number;
+  bassDefault: number;
+}
+
+export type Bass = {
+  target: number;
+  actual: number;
+}

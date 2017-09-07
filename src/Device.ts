@@ -1,5 +1,5 @@
 import * as api from "./api";
-import {Key, KeyState, Source} from "./types";
+import {Bass, BassCapability, Key, KeyState, Source} from "./types";
 const sleep = require("sleep-promise");
 
 export async function createDevice(ipAddress: string): Promise<Device> {
@@ -40,6 +40,18 @@ export class Device {
 
   public selectSource(source: Source): Promise<void> {
     return api.selectSource(this, source);
+  }
+
+  public getBassCapabilities(): Promise<BassCapability> {
+    return api.getBassCapabilities(this);
+  }
+
+  public getBass(): Promise<Bass> {
+    return api.getBass(this);
+  }
+
+  public setBass(value: number): Promise<void> {
+    return api.setBass(this, value);
   }
 }
 

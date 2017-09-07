@@ -1,7 +1,7 @@
 import * as http from "http";
 import * as xml2js from "xml2js";
 
-import {Key, KeyState, Source} from "./types";
+import {Bass, BassCapability, Key, KeyState, Source} from "./types";
 import {Component, Device, DeviceInfo} from "./Device";
 
 enum HttpMethod {
@@ -82,4 +82,32 @@ export async function listSources(device: Device): Promise<Source[]> {
 
 export async function selectSource(device: Device, source: Source): Promise<void> {
   await makeRequest(HttpMethod.Post, device.ipAddress, "/select", `<ContentItem source="${source.name}" ${source.sourceAccount ? `sourceAccount="${source.sourceAccount}"` : ""}></ContentItem>`);
+}
+
+export async function getBassCapabilities(device: Device): Promise<BassCapability> {
+  const bassCapability = await makeRequest(HttpMethod.Get, device.ipAddress, "/bassCapabilities");
+
+  return new Promise<BassCapability>((res, rej) => xml2js.parseString(bassCapability, (err, {bassCapabilities}) => {
+    err ? rej(err) : res(<BassCapability>{
+      bassAvailable: bassCapabilities.bassAvailable[0] === "true",
+      bassDefault: +bassCapabilities.bassDefault[0],
+      bassMax: +bassCapabilities.bassMax[0],
+      bassMin: +bassCapabilities.bassMin[0]
+    })
+  }));
+}
+
+export async function getBass(device: Device): Promise<Bass> {
+  const bass = await makeRequest(HttpMethod.Get, device.ipAddress, "/bass");
+
+  return new Promise<Bass>((res, rej) => xml2js.parseString(bass, (err, {bass}) => {
+    err ? rej(err) : res(<Bass>{
+      actual: +bass.actualbass[0],
+      target: +bass.targetbass[0]
+    });
+  }));
+}
+
+export async function setBass(device: Device, value: number): Promise<void> {
+  await makeRequest(HttpMethod.Post, device.ipAddress, "/bass", `<bass>${value}</bass>`);
 }
