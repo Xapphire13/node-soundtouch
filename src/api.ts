@@ -111,3 +111,7 @@ export async function getBass(device: Device): Promise<Bass> {
 export async function setBass(device: Device, value: number): Promise<void> {
   await makeRequest(HttpMethod.Post, device.ipAddress, "/bass", `<bass>${value}</bass>`);
 }
+
+export async function setName(device: Device, name: string): Promise<void> {
+  await makeRequest(HttpMethod.Post, device.ipAddress, "/name", `<name>${name}</name>`);
+}

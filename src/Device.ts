@@ -53,6 +53,11 @@ export class Device {
   public setBass(value: number): Promise<void> {
     return api.setBass(this, value);
   }
+
+  public async setName(name: string): Promise<void> {
+    await api.setName(this, name);
+    this.name = name;
+  }
 }
 
 export interface DeviceInfo {
