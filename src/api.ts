@@ -1,7 +1,7 @@
 import * as http from "http";
 import * as xml2js from "xml2js";
 
-import {Key, KeyState} from "./types";
+import {Key, KeyState, Source} from "./types";
 import {Component, Device, DeviceInfo} from "./Device";
 
 enum HttpMethod {
@@ -63,4 +63,23 @@ export async function getInfo(device: Device): Promise<DeviceInfo> {
 
 export async function setKey(device: Device, key: Key, state: KeyState): Promise<void> {
   await makeRequest(HttpMethod.Post, device.ipAddress, "/key", `<key state="${state}" sender="Gabbo">${key}</key>`);
+}
+
+export async function listSources(device: Device): Promise<Source[]> {
+  const sources = await makeRequest(HttpMethod.Get, device.ipAddress, "/sources");
+
+  return new Promise<Source[]>((res, rej) => xml2js.parseString(sources, (err, {sources}) => {
+    err ? rej(err) : res(sources.sourceItem ?
+      sources.sourceItem.map((sourceItem: any) => (<Source>{
+        name: sourceItem.$.source,
+        sourceAccount: sourceItem.$.sourceAccount,
+        status: sourceItem.$.status
+      })) :
+      []
+    );
+  }));
+}
+
+export async function selectSource(device: Device, source: Source): Promise<void> {
+  await makeRequest(HttpMethod.Post, device.ipAddress, "/select", `<ContentItem source="${source.name}" ${source.sourceAccount ? `sourceAccount="${source.sourceAccount}"` : ""}></ContentItem>`);
 }

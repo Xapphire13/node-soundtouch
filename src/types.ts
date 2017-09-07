@@ -53,3 +53,9 @@ export enum SourceStatus {
   Unavailable = "UNAVAILABLE",
   Ready = "READY"
 }
+
+export type Source = {
+  status: SourceStatus;
+  name: string;
+  sourceAccount: string;
+};

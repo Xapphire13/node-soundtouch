@@ -1,5 +1,5 @@
 import * as api from "./api";
-import {Key, KeyState} from "./types";
+import {Key, KeyState, Source} from "./types";
 const sleep = require("sleep-promise");
 
 export async function createDevice(ipAddress: string): Promise<Device> {
@@ -32,6 +32,14 @@ export class Device {
     await api.setKey(this, key, KeyState.Press);
     await sleep(5000);
     await api.setKey(this, key, KeyState.Release);
+  }
+
+  public listSources(): Promise<Source[]> {
+    return api.listSources(this);
+  }
+
+  public selectSource(source: Source): Promise<void> {
+    return api.selectSource(this, source);
   }
 }
 
