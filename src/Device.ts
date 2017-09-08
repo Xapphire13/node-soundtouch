@@ -3,7 +3,7 @@ import {Bass, BassCapability, Key, KeyState, Source, Volume} from "./types";
 const sleep = require("sleep-promise");
 
 export class Device {
-  public static async createDevice(ipAddress: string): Promise<Device> {
+  public static async create(ipAddress: string): Promise<Device> {
     const device = new Device(ipAddress);
     const deviceInfo = await device.getInfo();
     device.deviceType = deviceInfo.deviceType;
