@@ -1,5 +1,5 @@
 import * as api from "./api";
-import {Bass, BassCapability, Key, KeyState, Source} from "./types";
+import {Bass, BassCapability, Key, KeyState, Source, Volume} from "./types";
 const sleep = require("sleep-promise");
 
 export class Device {
@@ -57,6 +57,14 @@ export class Device {
   public async setName(name: string): Promise<void> {
     await api.setName(this.ipAddress, name);
     this.name = name;
+  }
+
+  public getVolume(): Promise<Volume> {
+    return api.getVolume(this.ipAddress);
+  }
+
+  public setVolume(value: number): Promise<void> {
+    return api.setVolume(this.ipAddress, value);
   }
 }
 

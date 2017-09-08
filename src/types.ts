@@ -71,3 +71,9 @@ export type Bass = {
   target: number;
   actual: number;
 }
+
+export type Volume = {
+  targetVolume: number;
+  actualVolume: number;
+  muteEnabled: boolean;
+}
