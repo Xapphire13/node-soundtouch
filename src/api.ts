@@ -81,9 +81,9 @@ export async function getVolume(ipAddress: string): Promise<Volume> {
   const {volume} = await xml2js(await get(ipAddress, "/volume"));
 
   return <Volume>{
-    actualVolume: +volume.actualVolume[0],
-    muteEnabled: volume.muteenabled[0] === "true",
-    targetVolume: +volume.targetVolume[0]
+    actualVolume: +volume.actualvolume[0],
+    muteEnabled: volume.muteenabled && volume.muteenabled[0] === "true",
+    targetVolume: +volume.targetvolume[0]
   }
 }
 
