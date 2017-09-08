@@ -2,7 +2,7 @@ import * as http from "http";
 import * as xml2js from "xml2js";
 
 import {Bass, BassCapability, Key, KeyState, Source} from "./types";
-import {Component, Device, DeviceInfo} from "./Device";
+import {Component, DeviceInfo} from "./Device";
 
 enum HttpMethod {
   Get = "GET",
@@ -39,8 +39,8 @@ function makeRequest(method: HttpMethod, host: string, path: string, data?: stri
   });
 }
 
-export async function getInfo(device: Device): Promise<DeviceInfo> {
-  const info = await makeRequest(HttpMethod.Get, device.ipAddress, "/info");
+export async function getInfo(ipAddress: string): Promise<DeviceInfo> {
+  const info = await makeRequest(HttpMethod.Get, ipAddress, "/info");
 
   return new Promise<DeviceInfo>((res, rej) => xml2js.parseString(info, (err, {info}) => {
     err ? rej(err) : res(<DeviceInfo>{
@@ -61,12 +61,12 @@ export async function getInfo(device: Device): Promise<DeviceInfo> {
   }));
 }
 
-export async function setKey(device: Device, key: Key, state: KeyState): Promise<void> {
-  await makeRequest(HttpMethod.Post, device.ipAddress, "/key", `<key state="${state}" sender="Gabbo">${key}</key>`);
+export async function setKey(ipAddress: string, key: Key, state: KeyState): Promise<void> {
+  await makeRequest(HttpMethod.Post, ipAddress, "/key", `<key state="${state}" sender="Gabbo">${key}</key>`);
 }
 
-export async function listSources(device: Device): Promise<Source[]> {
-  const sources = await makeRequest(HttpMethod.Get, device.ipAddress, "/sources");
+export async function listSources(ipAddress: string): Promise<Source[]> {
+  const sources = await makeRequest(HttpMethod.Get, ipAddress, "/sources");
 
   return new Promise<Source[]>((res, rej) => xml2js.parseString(sources, (err, {sources}) => {
     err ? rej(err) : res(sources.sourceItem ?
@@ -80,12 +80,12 @@ export async function listSources(device: Device): Promise<Source[]> {
   }));
 }
 
-export async function selectSource(device: Device, source: Source): Promise<void> {
-  await makeRequest(HttpMethod.Post, device.ipAddress, "/select", `<ContentItem source="${source.name}" ${source.sourceAccount ? `sourceAccount="${source.sourceAccount}"` : ""}></ContentItem>`);
+export async function selectSource(ipAddress: string, source: Source): Promise<void> {
+  await makeRequest(HttpMethod.Post, ipAddress, "/select", `<ContentItem source="${source.name}" ${source.sourceAccount ? `sourceAccount="${source.sourceAccount}"` : ""}></ContentItem>`);
 }
 
-export async function getBassCapabilities(device: Device): Promise<BassCapability> {
-  const bassCapability = await makeRequest(HttpMethod.Get, device.ipAddress, "/bassCapabilities");
+export async function getBassCapabilities(ipAddress: string): Promise<BassCapability> {
+  const bassCapability = await makeRequest(HttpMethod.Get, ipAddress, "/bassCapabilities");
 
   return new Promise<BassCapability>((res, rej) => xml2js.parseString(bassCapability, (err, {bassCapabilities}) => {
     err ? rej(err) : res(<BassCapability>{
@@ -97,8 +97,8 @@ export async function getBassCapabilities(device: Device): Promise<BassCapabilit
   }));
 }
 
-export async function getBass(device: Device): Promise<Bass> {
-  const bass = await makeRequest(HttpMethod.Get, device.ipAddress, "/bass");
+export async function getBass(ipAddress: string): Promise<Bass> {
+  const bass = await makeRequest(HttpMethod.Get, ipAddress, "/bass");
 
   return new Promise<Bass>((res, rej) => xml2js.parseString(bass, (err, {bass}) => {
     err ? rej(err) : res(<Bass>{
@@ -108,10 +108,10 @@ export async function getBass(device: Device): Promise<Bass> {
   }));
 }
 
-export async function setBass(device: Device, value: number): Promise<void> {
-  await makeRequest(HttpMethod.Post, device.ipAddress, "/bass", `<bass>${value}</bass>`);
+export async function setBass(ipAddress: string, value: number): Promise<void> {
+  await makeRequest(HttpMethod.Post, ipAddress, "/bass", `<bass>${value}</bass>`);
 }
 
-export async function setName(device: Device, name: string): Promise<void> {
-  await makeRequest(HttpMethod.Post, device.ipAddress, "/name", `<name>${name}</name>`);
+export async function setName(ipAddress: string, name: string): Promise<void> {
+  await makeRequest(HttpMethod.Post, ipAddress, "/name", `<name>${name}</name>`);
 }
