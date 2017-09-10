@@ -8,11 +8,12 @@
     "skipLibCheck": true,
     "outDir": "./dist",
     "noImplicitReturns": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "declaration": true,
+    "declarationDir": "./dist/typescript"
   },
   "include": [
-    "./src/**/*.ts",
-    "./typings/**/*.d.ts"
+    "./src/**/*.ts"
   ],
   "exclude": [
     "node_modules"
