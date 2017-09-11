@@ -54,7 +54,18 @@ export enum SourceStatus {
   Ready = "READY"
 }
 
-export type Source = {
+export enum Source {
+  Airplay = "AIRPLAY",
+  Aux = "AUX",
+  Deezer = "DEEZER",
+  IHeart = "IHEART",
+  InternetRadio = "INTERNET_RADIO",
+  Pandora = "PANDORA",
+  Spotify = "SPOTIFY",
+  Standby = "STANDBY"
+}
+
+export type SourceInfo = {
   status: SourceStatus;
   name: string;
   sourceAccount: string;
@@ -77,3 +88,29 @@ export type Volume = {
   actualVolume: number;
   muteEnabled: boolean;
 }
+
+export type ContentItem = {
+  source: Source;
+  location: string;
+  sourceAccount: string;
+  isPresetable: boolean;
+  name: string;
+}
+
+export type AlbumArt = {
+  imageStatus: any;
+  url: string;
+}
+
+export type NowPlaying = {
+  album: string;
+  art: AlbumArt;
+  artist: string;
+  contentItem: ContentItem;
+  description: string;
+  playStatus: PlayStatus;
+  source: Source;
+  stationLocation: string;
+  stationName: string;
+  track: string;
+};

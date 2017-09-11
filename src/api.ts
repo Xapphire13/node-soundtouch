@@ -1,7 +1,15 @@
 import * as http from "http";
 const xml2js = require("xml2js-es6-promise");
 
-import {Bass, BassCapability, Key, KeyState, Source, Volume} from "./types";
+import {
+  Bass,
+  BassCapability,
+  Key,
+  KeyState,
+  NowPlaying,
+  SourceInfo,
+  Volume
+} from "./types";
 import {Component, DeviceInfo} from "./Device";
 
 enum HttpMethod {
@@ -33,19 +41,19 @@ export function setKey(ipAddress: string, key: Key, state: KeyState): Promise<vo
   return post(ipAddress, "/key", `<key state="${state}" sender="Gabbo">${key}</key>`);
 }
 
-export async function listSources(ipAddress: string): Promise<Source[]> {
+export async function listSources(ipAddress: string): Promise<SourceInfo[]> {
   const {sources} = await xml2js(await get(ipAddress, "/sources"));
 
   return sources.sourceItem ?
-    sources.sourceItem.map((sourceItem: any) => (<Source>{
-      name: sourceItem.$.source,
-      sourceAccount: sourceItem.$.sourceAccount,
-      status: sourceItem.$.status
+    sources.sourceItem.map((sourceItem: any) => (<SourceInfo>{
+      name: sourceItem.$["source"],
+      sourceAccount: sourceItem.$["sourceAccount"],
+      status: sourceItem.$["status"]
     })) :
     [];
 }
 
-export function selectSource(ipAddress: string, source: Source): Promise<void> {
+export function selectSource(ipAddress: string, source: SourceInfo): Promise<void> {
   return post(ipAddress, "/select", `<ContentItem source="${source.name}" ${source.sourceAccount ? `sourceAccount="${source.sourceAccount}"` : ""}></ContentItem>`);
 }
 
@@ -89,6 +97,32 @@ export async function getVolume(ipAddress: string): Promise<Volume> {
 
 export function setVolume(ipAddress: string, value: number): Promise<void> {
   return post(ipAddress, "/volume", `<volume>${value}</volume>`);
+}
+
+export async function getNowPlaying(ipAddress: string): Promise<NowPlaying> {
+  const {nowPlaying} = await xml2js(await get(ipAddress, "/now_playing"));
+
+  return <NowPlaying>{
+    album: nowPlaying.album && nowPlaying.album[0],
+    art: nowPlaying.art && {
+      imageStatus: nowPlaying.art[0].$["artImageStatus"],
+      url: nowPlaying.art[0][0]
+    },
+    artist: nowPlaying.artist && nowPlaying.artist[0],
+    contentItem: {
+      isPresetable: nowPlaying.ContentItem[0].$["isPresetable"],
+      location: nowPlaying.ContentItem[0].$["location"],
+      name: nowPlaying.ContentItem[0][0],
+      source: nowPlaying.ContentItem[0].$["source"],
+      sourceAccount: nowPlaying.ContentItem[0].$["sourceAccount"]
+    },
+    description: nowPlaying.description && nowPlaying.description[0],
+    playStatus: nowPlaying.playStatus && nowPlaying.playStatus[0],
+    source: nowPlaying.$["source"],
+    stationLocation: nowPlaying.stationLocation && nowPlaying.stationLocation[0],
+    stationName: nowPlaying.stationName && nowPlaying.stationName[0],
+    track: nowPlaying.track && nowPlaying.track[0]
+  };
 }
 
 function get(host: string, path: string): Promise<string> {

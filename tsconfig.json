@@ -10,7 +10,7 @@
     "noImplicitReturns": true,
     "strictNullChecks": true,
     "declaration": true,
-    "declarationDir": "./dist/typescript"
+    "declarationDir": "./typescript"
   },
   "include": [
     "./src/**/*.ts"

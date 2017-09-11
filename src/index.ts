@@ -6,6 +6,7 @@ export namespace Api {
     getBass,
     getBassCapabilities,
     getInfo,
+    getNowPlaying,
     getVolume,
     listSources,
     selectSource,
@@ -24,4 +25,18 @@ export namespace DiscoveryService {
 }
 
 export {Component, Device, DeviceInfo, NetworkInfo} from "./Device";
-export {ArtStatus, Bass, BassCapability, Key, KeyState, PlayStatus, Source, SourceStatus} from "./types";
+export {
+  AlbumArt,
+  ArtStatus,
+  Bass,
+  BassCapability,
+  ContentItem,
+  Key,
+  KeyState,
+  NowPlaying,
+  PlayStatus,
+  Source,
+  SourceInfo,
+  SourceStatus,
+  Volume
+} from "./types";

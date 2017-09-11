@@ -1,5 +1,14 @@
 import * as api from "./api";
-import {Bass, BassCapability, Key, KeyState, Source, Volume} from "./types";
+import {
+  Bass,
+  BassCapability,
+  Key,
+  KeyState,
+  NowPlaying,
+  Source,
+  SourceInfo,
+  Volume
+} from "./types";
 const sleep = require("sleep-promise");
 
 export class Device {
@@ -34,11 +43,11 @@ export class Device {
     await api.setKey(this.ipAddress, key, KeyState.Release);
   }
 
-  public listSources(): Promise<Source[]> {
+  public listSources(): Promise<SourceInfo[]> {
     return api.listSources(this.ipAddress);
   }
 
-  public selectSource(source: Source): Promise<void> {
+  public selectSource(source: SourceInfo): Promise<void> {
     return api.selectSource(this.ipAddress, source);
   }
 
@@ -65,6 +74,26 @@ export class Device {
 
   public setVolume(value: number): Promise<void> {
     return api.setVolume(this.ipAddress, value);
+  }
+
+  public getNowPlaying(): Promise<NowPlaying> {
+    return api.getNowPlaying(this.ipAddress);
+  }
+
+  public async isPoweredOn(): Promise<boolean> {
+    return (await this.getNowPlaying()).source !== Source.Standby;
+  }
+
+  public async powerOn(): Promise<void> {
+    if (!(await this.isPoweredOn())) {
+      await this.pressKey(Key.Power);
+    }
+  }
+
+  public async powerOff(): Promise<void> {
+    if (await this.isPoweredOn()) {
+      await this.pressKey(Key.Power);
+    }
   }
 }
 
