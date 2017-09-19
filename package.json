@@ -6,6 +6,7 @@
   "types": "typescript/index.d.ts",
   "scripts": {},
   "author": "Xapphire13",
+  "repository": "https://github.com/Xapphire13/node-soundtouch.git",
   "license": "MIT",
   "keywords": [
     "bose",
