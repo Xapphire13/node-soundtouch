@@ -1,12 +1,10 @@
 {
   "name": "node-soundtouch",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Bose Soundtouch API for node.js",
   "main": "dist/index.js",
   "types": "typescript/index.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "author": "Xapphire13",
   "license": "MIT",
   "keywords": [
