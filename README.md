@@ -1,6 +1,6 @@
 # node-soundtouch
 node-soundtouch is a Node.js library that implements the Bose
-[Soundtouch API](http://products.bose.com/api-developer/index.html).
+[SoundTouch API](http://products.bose.com/api-developer/index.html).
 
 It is currently in an alpha state and only implements as much of the API as
 I currently need. Eventually though the intent is to support the full API.
