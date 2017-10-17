@@ -1,3 +1,6 @@
+[![npm](https://img.shields.io/npm/v/node-soundtouch.svg)](https://www.npmjs.com/package/node-soundtouch)
+[![npm](https://img.shields.io/npm/dt/node-soundtouch.svg)](https://www.npmjs.com/package/node-soundtouch)
+
 # node-soundtouch
 node-soundtouch is a Node.js library that implements the Bose
 [SoundTouch API](http://products.bose.com/api-developer/index.html).
