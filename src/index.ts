@@ -13,7 +13,8 @@ export namespace Api {
     setBass,
     setKey,
     setName,
-    setVolume
+    setVolume,
+    setTimeout
   } = api;
 }
 

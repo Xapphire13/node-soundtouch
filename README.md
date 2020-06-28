@@ -20,7 +20,9 @@ This package includes TypeScript typings that should be automatically detected.
 ## Usage
 Below is an example in ES6/TypeScript
 ```Javascript
-import {DiscoveryService, Key} from "node-soundtouch";
+import {DiscoveryService, Key, Api} from "node-soundtouch";
+
+Api.setTimeout(5000);
 
 const device = await DiscoveryService.findDevice("My Device");
 

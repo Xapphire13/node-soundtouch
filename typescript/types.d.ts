@@ -2,7 +2,7 @@ export declare enum ArtStatus {
     Invalid = "INVALID",
     ShowDefaultImage = "SHOW_DEFAULT_IMAGE",
     Downloading = "DOWNLOADING",
-    ImagePresent = "IMAGE_PRESENT",
+    ImagePresent = "IMAGE_PRESENT"
 }
 export declare enum Key {
     Play = "PLAY",
@@ -32,22 +32,22 @@ export declare enum Key {
     PlayPause = "PLAY_PAUSE",
     AddFavorite = "ADD_FAVORITE",
     RemoveFavorite = "REMOVE_FAVORITE",
-    InvalidKey = "INVALID_KEY",
+    InvalidKey = "INVALID_KEY"
 }
 export declare enum KeyState {
     Press = "press",
-    Release = "release",
+    Release = "release"
 }
 export declare enum PlayStatus {
     Playing = "PLAY_STATE",
     Paused = "PAUSE_STATE",
     Stopped = "STOP_STATE",
     Buffering = "BUFFERING_STATE",
-    Invalid = "INVALID_PLAY_STATUS",
+    Invalid = "INVALID_PLAY_STATUS"
 }
 export declare enum SourceStatus {
     Unavailable = "UNAVAILABLE",
-    Ready = "READY",
+    Ready = "READY"
 }
 export declare enum Source {
     Airplay = "AIRPLAY",
@@ -57,7 +57,7 @@ export declare enum Source {
     InternetRadio = "INTERNET_RADIO",
     Pandora = "PANDORA",
     Spotify = "SPOTIFY",
-    Standby = "STANDBY",
+    Standby = "STANDBY"
 }
 export declare type SourceInfo = {
     status: SourceStatus;
