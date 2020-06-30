@@ -1,0 +1,70 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Source = exports.SourceStatus = exports.PlayStatus = exports.KeyState = exports.Key = exports.ArtStatus = void 0;
+var ArtStatus;
+(function (ArtStatus) {
+    ArtStatus["Invalid"] = "INVALID";
+    ArtStatus["ShowDefaultImage"] = "SHOW_DEFAULT_IMAGE";
+    ArtStatus["Downloading"] = "DOWNLOADING";
+    ArtStatus["ImagePresent"] = "IMAGE_PRESENT";
+})(ArtStatus = exports.ArtStatus || (exports.ArtStatus = {}));
+var Key;
+(function (Key) {
+    Key["Play"] = "PLAY";
+    Key["Pause"] = "PAUSE";
+    Key["Stop"] = "STOP";
+    Key["PreviousTrack"] = "PREV_TRACK";
+    Key["NextTrack"] = "NEXT_TRACK";
+    Key["ThumbsUp"] = "THUMBS_UP";
+    Key["ThumbsDown"] = "THUMBS_DOWN";
+    Key["Bookmark"] = "BOOKMARK";
+    Key["Power"] = "POWER";
+    Key["Mute"] = "MUTE";
+    Key["VolumeUp"] = "VOLUME_UP";
+    Key["VolumeDown"] = "VOLUME_DOWN";
+    Key["Preset1"] = "PRESET_1";
+    Key["Preset2"] = "PRESET_2";
+    Key["Preset3"] = "PRESET_3";
+    Key["Preset4"] = "PRESET_4";
+    Key["Preset5"] = "PRESET_5";
+    Key["Preset6"] = "PRESET_6";
+    Key["AuxInput"] = "AUX_INPUT";
+    Key["ShuffleOff"] = "SHUFFLE_OFF";
+    Key["ShuffleOn"] = "SHUFFLE_ON";
+    Key["RepeatOff"] = "REPEAT_OFF";
+    Key["RepeatOne"] = "REPEAT_ONE";
+    Key["RepeatAll"] = "REPEAT_ALL";
+    Key["PlayPause"] = "PLAY_PAUSE";
+    Key["AddFavorite"] = "ADD_FAVORITE";
+    Key["RemoveFavorite"] = "REMOVE_FAVORITE";
+    Key["InvalidKey"] = "INVALID_KEY";
+})(Key = exports.Key || (exports.Key = {}));
+var KeyState;
+(function (KeyState) {
+    KeyState["Press"] = "press";
+    KeyState["Release"] = "release";
+})(KeyState = exports.KeyState || (exports.KeyState = {}));
+var PlayStatus;
+(function (PlayStatus) {
+    PlayStatus["Playing"] = "PLAY_STATE";
+    PlayStatus["Paused"] = "PAUSE_STATE";
+    PlayStatus["Stopped"] = "STOP_STATE";
+    PlayStatus["Buffering"] = "BUFFERING_STATE";
+    PlayStatus["Invalid"] = "INVALID_PLAY_STATUS";
+})(PlayStatus = exports.PlayStatus || (exports.PlayStatus = {}));
+var SourceStatus;
+(function (SourceStatus) {
+    SourceStatus["Unavailable"] = "UNAVAILABLE";
+    SourceStatus["Ready"] = "READY";
+})(SourceStatus = exports.SourceStatus || (exports.SourceStatus = {}));
+var Source;
+(function (Source) {
+    Source["Airplay"] = "AIRPLAY";
+    Source["Aux"] = "AUX";
+    Source["Deezer"] = "DEEZER";
+    Source["IHeart"] = "IHEART";
+    Source["InternetRadio"] = "INTERNET_RADIO";
+    Source["Pandora"] = "PANDORA";
+    Source["Spotify"] = "SPOTIFY";
+    Source["Standby"] = "STANDBY";
+})(Source = exports.Source || (exports.Source = {}));
