@@ -1,7 +1,7 @@
 import * as api from "./api";
 import * as ds from "./discoveryService";
 export declare namespace Api {
-    const getBass: typeof api.getBass, getBassCapabilities: typeof api.getBassCapabilities, getInfo: typeof api.getInfo, getNowPlaying: typeof api.getNowPlaying, getVolume: typeof api.getVolume, listSources: typeof api.listSources, selectSource: typeof api.selectSource, setBass: typeof api.setBass, setKey: typeof api.setKey, setName: typeof api.setName, setVolume: typeof api.setVolume;
+    const getBass: typeof api.getBass, getBassCapabilities: typeof api.getBassCapabilities, getInfo: typeof api.getInfo, getNowPlaying: typeof api.getNowPlaying, getVolume: typeof api.getVolume, listSources: typeof api.listSources, selectSource: typeof api.selectSource, setBass: typeof api.setBass, setKey: typeof api.setKey, setName: typeof api.setName, setVolume: typeof api.setVolume, setTimeout: typeof api.setTimeout;
 }
 export declare namespace DiscoveryService {
     const findDevice: typeof ds.findDevice, searchForDevices: typeof ds.searchForDevices;

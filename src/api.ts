@@ -17,6 +17,8 @@ enum HttpMethod {
   Post = "POST"
 }
 
+let timeout = 0
+
 export async function getInfo(ipAddress: string): Promise<DeviceInfo> {
   const {info} = await xml2js(await get(ipAddress, "/info"));
 
@@ -125,6 +127,10 @@ export async function getNowPlaying(ipAddress: string): Promise<NowPlaying> {
   };
 }
 
+export function setTimeout(milliseconds: number): void {
+  timeout = milliseconds
+}
+
 function get(host: string, path: string): Promise<string> {
   return makeRequest(HttpMethod.Get, host, path);
 }
@@ -142,7 +148,8 @@ function makeRequest(method: HttpMethod, host: string, path: string, data?: stri
       path,
       headers: {
         "Content-Type": "application/xml"
-      }
+      },
+      timeout
     }, res => {
       res.on("data", (result: string) => {
         res.statusCode === 200 ?
@@ -154,6 +161,7 @@ function makeRequest(method: HttpMethod, host: string, path: string, data?: stri
       });
     });
 
+    req.on("timeout", () => req.abort());
     req.on("error", err => reject(err));
 
     if (method === HttpMethod.Post && data) {

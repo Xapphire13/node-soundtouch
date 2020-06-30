@@ -11,3 +11,4 @@ export declare function setName(ipAddress: string, name: string): Promise<void>;
 export declare function getVolume(ipAddress: string): Promise<Volume>;
 export declare function setVolume(ipAddress: string, value: number): Promise<void>;
 export declare function getNowPlaying(ipAddress: string): Promise<NowPlaying>;
+export declare function setTimeout(milliseconds: number): void;
